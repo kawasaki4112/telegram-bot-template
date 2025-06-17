@@ -1,6 +1,6 @@
 import os
-# import asyncio
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+
 from src.data.models import BaseEntity
 
 
@@ -14,7 +14,3 @@ async_session = async_sessionmaker(engine)
 async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(BaseEntity.metadata.create_all)
-
-
-# if __name__ == "__main__":
-#     asyncio.run(async_main())

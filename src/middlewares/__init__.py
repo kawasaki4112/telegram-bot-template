@@ -18,5 +18,5 @@ def register_all_middlwares(dp: Dispatcher):
     dp.callback_query.outer_middleware(ThrottlingMiddleware())
     dp.message.middleware(ThrottlingMiddleware())
 
-    dp.callback_query.outer_middleware(BanCheckMiddleware(async_session))
-    dp.message.middleware(BanCheckMiddleware(async_session))
+    dp.callback_query.outer_middleware(BanCheckMiddleware())
+    dp.message.middleware(BanCheckMiddleware())

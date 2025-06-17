@@ -1,11 +1,17 @@
+from typing import Callable, Dict, Any, Union
 from aiogram import BaseMiddleware
-from aiogram.types import User
+from aiogram.types import User, Message, CallbackQuery
 
-from src.data.repositories import user_crud
+from src.data.repositories.user_repository import user_crud
 
 
 class ExistsUserMiddleware(BaseMiddleware):
-    async def __call__(self, handler, event, data):
+    async def __call__(
+        self,
+        handler: Callable[[Any, Dict[str, Any]], Any],
+        event: Union[Message, CallbackQuery],
+        data: Dict[str, Any],
+    ) -> Any:
         this_user: User = data.get("event_from_user")
 
         if not this_user.is_bot:

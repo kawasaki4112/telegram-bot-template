@@ -16,7 +16,8 @@ class ThrottlingMiddleware(BaseMiddleware):
     async def __call__(
         self, 
         handler: Callable[[Message, Dict[str, Any]],
-        Awaitable[Any]], event: Message, data):
+        Awaitable[Any]], 
+        event: Message, data) -> Any:
         this_user: User = data.get("event_from_user")
 
         if get_flag(data, "rate") is not None:

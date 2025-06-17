@@ -2,11 +2,11 @@ version: '3.9'
 
 services:
   app:
-    image: mybot:latest
+    image: bot:latest
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: mybot
+      dockerfile: DOCKERFILE
+    container_name: bot
     restart: unless-stopped
     depends_on:
       - db
@@ -19,7 +19,11 @@ services:
 
   db:
     image: postgres:16
-    container_name: mybot_db
+    container_name: template_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: template_db
     restart: unless-stopped
     env_file:
       - .env.db
